@@ -63,15 +63,47 @@
 		3315D45C21321CAE0025BF07 /* Sob el carta */ = {
 			isa = PBXGroup;
 			children = (
-				3315D46F213220650025BF07 /* GoogleService-Info.plist */,
 				3315D45D21321CAE0025BF07 /* AppDelegate.swift */,
-				3315D45F21321CAE0025BF07 /* ViewController.swift */,
-				3315D46121321CAE0025BF07 /* Main.storyboard */,
+				3315D4732132210C0025BF07 /* Model */,
+				3315D472213221090025BF07 /* View */,
+				3315D471213221060025BF07 /* Controller */,
 				3315D46421321CAF0025BF07 /* Assets.xcassets */,
-				3315D46621321CAF0025BF07 /* LaunchScreen.storyboard */,
 				3315D46921321CAF0025BF07 /* Info.plist */,
+				3315D46F213220650025BF07 /* GoogleService-Info.plist */,
 			);
 			path = "Sob el carta";
+			sourceTree = "<group>";
+		};
+		3315D471213221060025BF07 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3315D472213221090025BF07 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3315D474213221210025BF07 /* Main */,
+				3315D46621321CAF0025BF07 /* LaunchScreen.storyboard */,
+				3315D46121321CAE0025BF07 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3315D4732132210C0025BF07 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3315D474213221210025BF07 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3315D45F21321CAE0025BF07 /* ViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		522F1C5AD774B48E3F59111B /* Frameworks */ = {
@@ -383,7 +415,10 @@
 				DEVELOPMENT_TEAM = GXL4M9LBQ5;
 				INFOPLIST_FILE = "Sob el carta/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.amine.Sob-el-carta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -400,7 +435,10 @@
 				DEVELOPMENT_TEAM = GXL4M9LBQ5;
 				INFOPLIST_FILE = "Sob el carta/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.amine.Sob-el-carta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
