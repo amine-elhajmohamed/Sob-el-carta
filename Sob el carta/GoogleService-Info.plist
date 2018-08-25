@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>702302971793-nr30ov3n934e5e7rl076kt5dcdejsogk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.702302971793-nr30ov3n934e5e7rl076kt5dcdejsogk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCpWdpw-z2YyeEbsUUWG4B9xpxaMxw5OVs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>702302971793</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.amine.Sob-el-carta</string>
+	<key>PROJECT_ID</key>
+	<string>sob-el-carta</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sob-el-carta.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:702302971793:ios:8cdb8bc5f9a8e853</string>
+	<key>DATABASE_URL</key>
+	<string>https://sob-el-carta.firebaseio.com</string>
+</dict>
+</plist>

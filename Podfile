@@ -7,7 +7,9 @@ target 'Sob el carta' do
 
   # Pods for Sob el carta
 
-
+pod 'Firebase/Core'
+pod 'Firebase/MLVision'
+pod 'Firebase/MLVisionTextModel'
 
 
 end
