@@ -1,0 +1,6 @@
+framework module Pods_Sob_el_carta {
+  umbrella header "Pods-Sob el carta-umbrella.h"
+
+  export *
+  module * { export * }
+}
