@@ -7,19 +7,32 @@
 //
 
 import UIKit
+import FirebaseMLVision
 
 class ViewController: UIViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let vision = Vision.vision()
+        let textRecognizer = vision.onDeviceTextRecognizer()
+        
+        let image = VisionImage(image: UIImage(named: "CarteTest")!)
+        
+        
+        textRecognizer.process(image) { (visionText: VisionText?, error: Error?) in
+            
+            guard error == nil, let visionText = visionText else {
+                return
+            }
+            
+            print(visionText.text)
+            print()
+            
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
