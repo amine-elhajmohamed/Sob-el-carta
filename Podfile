@@ -10,6 +10,6 @@ target 'Sob el carta' do
 pod 'Firebase/Core'
 pod 'Firebase/MLVision'
 pod 'Firebase/MLVisionTextModel'
-
+pod 'CameraBackground'
 
 end

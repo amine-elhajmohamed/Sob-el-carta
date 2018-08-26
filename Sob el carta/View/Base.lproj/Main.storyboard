@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +12,50 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Sob_el_carta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kfu-Fe-yYB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abr-bK-3sN">
+                                <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="E9v-47-iVj" appends="YES" id="TLm-7T-vGp"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Abr-bK-3sN" firstAttribute="centerY" secondItem="Kfu-Fe-yYB" secondAttribute="centerY" id="0v7-d6-qZs"/>
+                            <constraint firstItem="Abr-bK-3sN" firstAttribute="height" secondItem="Kfu-Fe-yYB" secondAttribute="height" id="FLn-bV-bd2"/>
+                            <constraint firstItem="Kfu-Fe-yYB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="JeP-dC-W83"/>
+                            <constraint firstItem="Kfu-Fe-yYB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LDN-s1-1Va"/>
+                            <constraint firstItem="Kfu-Fe-yYB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LnQ-OJ-y1M"/>
+                            <constraint firstItem="Abr-bK-3sN" firstAttribute="width" secondItem="Kfu-Fe-yYB" secondAttribute="width" id="SAH-tU-zXY"/>
+                            <constraint firstItem="Kfu-Fe-yYB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ZUz-BO-Obj"/>
+                            <constraint firstItem="Abr-bK-3sN" firstAttribute="centerX" secondItem="Kfu-Fe-yYB" secondAttribute="centerX" id="ldv-1Z-KL5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="cameraView" destination="Kfu-Fe-yYB" id="uLs-KX-CHR"/>
+                        <outlet property="viewHandleCameraViewTap" destination="Abr-bK-3sN" id="Udd-6v-lWy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="E9v-47-iVj">
+                    <connections>
+                        <action selector="cameraViewTaped:" destination="BYZ-38-t0r" id="EBR-9m-Rkb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="125.4872563718141"/>
         </scene>
     </scenes>
 </document>
