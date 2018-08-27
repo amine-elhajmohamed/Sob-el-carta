@@ -12,10 +12,18 @@ import CameraBackground
 import AVFoundation
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var btnSettings: UIButton!
+    
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var viewHandleCameraViewTap: UIView!
     @IBOutlet weak var viewAboveSettingsView: UIView!
+    @IBOutlet weak var settingsReviewView: UIView!
+    @IBOutlet weak var settingsView: UIView!
+    
+    @IBOutlet weak var constarintSettingsReviewMenuBottom: NSLayoutConstraint!
+    @IBOutlet weak var constarintSettingsViewBottom: NSLayoutConstraint!
+    
     
     private lazy var vision = Vision.vision()
     private lazy var textRecognizer = vision.onDeviceTextRecognizer()
@@ -26,7 +34,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         configureView()
-        hideSettings()
+        hideSettings(animated: false)
         loadSettingsData()
         
     }
@@ -41,12 +49,46 @@ class ViewController: UIViewController {
         
     }
     
-    private func showSettings(){
+    private func showSettings(animated: Bool){
         isShowingSettingsView = true
+        
+        let todo = {
+            self.constarintSettingsReviewMenuBottom.priority = UILayoutPriority(250)
+            self.constarintSettingsViewBottom.priority = UILayoutPriority(999)
+            self.viewAboveSettingsView.alpha = 1
+            self.btnSettings.setImage(UIImage(named: "IconDown"), for: .normal)
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: [.curveEaseOut], animations: {
+                todo()
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }else{
+            todo()
+        }
+        
     }
     
-    private func hideSettings(){
+    private func hideSettings(animated: Bool){
         isShowingSettingsView = false
+        
+        let todo = {
+            self.constarintSettingsViewBottom.priority = UILayoutPriority(250)
+            self.constarintSettingsReviewMenuBottom.priority = UILayoutPriority(999)
+            self.viewAboveSettingsView.alpha = 0
+            self.btnSettings.setImage(UIImage(named: "IconSettings"), for: .normal)
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: [.curveEaseOut], animations: {
+                todo()
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }else{
+            todo()
+        }
+        
     }
     
     
@@ -112,6 +154,20 @@ class ViewController: UIViewController {
     }
     
     //MARK: Actions
+    
+    @IBAction func btnClicked(_ sender: UIButton) {
+        switch sender {
+        case btnSettings:
+            if isShowingSettingsView {
+                hideSettings(animated: true)
+            }else{
+                showSettings(animated: true)
+            }
+            
+        default:
+            break
+        }
+    }
     
     @IBAction func cameraViewTaped(_ sender: UITapGestureRecognizer) {
         startLokingForTicketNumberFromCamera()
