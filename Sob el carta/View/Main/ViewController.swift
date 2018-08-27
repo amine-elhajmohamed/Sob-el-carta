@@ -15,20 +15,40 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var viewHandleCameraViewTap: UIView!
+    @IBOutlet weak var viewAboveSettingsView: UIView!
     
     private lazy var vision = Vision.vision()
     private lazy var textRecognizer = vision.onDeviceTextRecognizer()
+    
+    private var isShowingSettingsView = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
+        hideSettings()
+        loadSettingsData()
         
     }
+    
+    //MARK: - View configuration
     
     private func configureView(){
         cameraView.addCameraBackground(.back, showButtons: false)
     }
+    
+    private func loadSettingsData(){
+        
+    }
+    
+    private func showSettings(){
+        isShowingSettingsView = true
+    }
+    
+    private func hideSettings(){
+        isShowingSettingsView = false
+    }
+    
     
     private func startLokingForTicketNumberFromCamera(){
         viewHandleCameraViewTap.isUserInteractionEnabled = false

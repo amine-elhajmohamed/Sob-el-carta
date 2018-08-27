@@ -15,6 +15,8 @@
 		3315D470213220650025BF07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3315D46F213220650025BF07 /* GoogleService-Info.plist */; };
 		3315D476213227D90025BF07 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 3315D475213227D90025BF07 /* Todo */; };
 		3315D4782132335C0025BF07 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3315D4772132335C0025BF07 /* StringUtils.swift */; };
+		33A8D3922134241D00FB624D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3912134241D00FB624D /* Settings.swift */; };
+		33A8D3942134277E00FB624D /* OperatorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3932134277E00FB624D /* OperatorUtils.swift */; };
 		A93052627204C340BA78EEED /* Pods_Sob_el_carta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 		3315D46F213220650025BF07 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3315D475213227D90025BF07 /* Todo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 		3315D4772132335C0025BF07 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		33A8D3912134241D00FB624D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		33A8D3932134277E00FB624D /* OperatorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorUtils.swift; sourceTree = "<group>"; };
 		D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sob_el_carta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -82,7 +86,9 @@
 		3315D471213221060025BF07 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				33A8D3912134241D00FB624D /* Settings.swift */,
 				3315D4772132335C0025BF07 /* StringUtils.swift */,
+				33A8D3932134277E00FB624D /* OperatorUtils.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -280,6 +286,8 @@
 			files = (
 				3315D4782132335C0025BF07 /* StringUtils.swift in Sources */,
 				3315D46021321CAE0025BF07 /* ViewController.swift in Sources */,
+				33A8D3942134277E00FB624D /* OperatorUtils.swift in Sources */,
+				33A8D3922134241D00FB624D /* Settings.swift in Sources */,
 				3315D45E21321CAE0025BF07 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
