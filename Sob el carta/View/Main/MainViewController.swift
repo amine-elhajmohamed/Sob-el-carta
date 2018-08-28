@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  Sob el carta
 //
 //  Created by MedAmine on 8/26/18.
@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import FirebaseMLVision
 import CameraBackground
-import AVFoundation
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     @IBOutlet weak var btnSettings: UIButton!
     
@@ -41,9 +39,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXOoredoo: NSLayoutConstraint!
     @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXOrange: NSLayoutConstraint!
     @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXTunisieTelecom: NSLayoutConstraint!
-    
-    private lazy var vision = Vision.vision()
-    private lazy var textRecognizer = vision.onDeviceTextRecognizer()
     
     private var isShowingSettingsView = false
     
@@ -111,6 +106,27 @@ class ViewController: UIViewController {
         
     }
     
+    private func dialTicketNumber(phoneOperator: Operators, ticketNumber: String){
+        var operatorCode = ""
+        
+        switch phoneOperator {
+        case .ooredoo:
+            operatorCode = OperatorsCodes.ooredoo.rawValue
+        case .orange:
+            operatorCode = OperatorsCodes.orange.rawValue
+        case .tunisieTelecom:
+            operatorCode = OperatorsCodes.tunisieTelecom.rawValue
+        }
+        
+        dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber)
+    }
+    
+    private func dialTicketNumber(operatorCode: String, ticketNumber: String){
+        if let phoneUrl = URL(string: "tel://*\(operatorCode)*\(ticketNumber)#") {
+            UIApplication.shared.open(phoneUrl, options: [:], completionHandler: nil)
+        }
+    }
+    
     private func selectOperator(_ phoneOperator: Operators?) {
         Settings.shared.selectedOperator = phoneOperator?.rawValue
         lblOperatorName.text = phoneOperator?.rawValue ?? "Automatique"
@@ -173,53 +189,55 @@ class ViewController: UIViewController {
             
             guard error == nil, let image = image else {
                 onComplitionDo()
-                let errorOcured = 1
+                let alertVC = UIAlertController(title: "Erreur", message: "Échec dans le caméra, peut pas prendre le photo", preferredStyle: .alert)
+                alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alertVC, animated: true, completion: nil)
                 return
             }
-        
-            self.startTextRecognizer(image: image, onComplition: { (text: String?) in
+            
+            TicketController.shared.analyseImage(image: image, searchForOperatorCode: Settings.shared.selectedOperator == nil, onComplition: { (operatorCode: String?, ticketNumber: String?) in
                 
-                guard let text = text else {
-                    onComplitionDo()
-                    let errorOcured = 1
+                guard let ticketNumber = ticketNumber else {
+                    let alertVC = UIAlertController(title: "Échec", message: "Peut pas trouver le numéro de la carte, essayez à nouveau de scanner la carte", preferredStyle: .alert)
+                    alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (ac) in
+                        onComplitionDo()
+                    }))
+                    self.present(alertVC, animated: true, completion: nil)
                     return
                 }
                 
+                let selectedOperator = Settings.shared.selectedOperator
                 
-                
-//                print(text)
-                let operatorCode = StringUtils.shared.getTicketOperatorCode(fromText: text)
-                let ticketNumber = StringUtils.shared.getTicketNumber(fromText: text)
-                
-                let alertVC = UIAlertController(title: nil, message: "*\(operatorCode.first ?? "XX")*\(ticketNumber.first ?? "XXXXXXXXXXXXXXXXXXX")#", preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-                self.present(alertVC, animated: true, completion: nil)
+                guard (selectedOperator != nil) || (operatorCode != nil) else {
+                    let chooseOperatorVC = self.storyboard?.instantiateViewController(withIdentifier: "ChooseOperatorVC") as! ChooseOperatorViewController
+                    
+                    chooseOperatorVC.onOperatorSelection = { (selectedOperatorFromView: Operators?) in
+                        guard let selectedOperatorFromView = selectedOperatorFromView else {
+                            chooseOperatorVC.close {
+                                onComplitionDo()
+                            }
+                            return
+                        }
+                        
+                        chooseOperatorVC.close {
+                            onComplitionDo()
+                            self.dialTicketNumber(phoneOperator: selectedOperatorFromView, ticketNumber: ticketNumber)
+                        }
+                    }
+                    
+                    self.present(chooseOperatorVC, animated: false, completion: nil)
+                    return
+                }
                 
                 onComplitionDo()
+                
+                if let phoneOperator = Operators(rawValue: selectedOperator ?? ""){
+                    self.dialTicketNumber(phoneOperator: phoneOperator, ticketNumber: ticketNumber)
+                }else if let operatorCode = operatorCode {
+                    self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber)
+                }
             })
-            
         }
-    }
-    
-    private func startTextRecognizer(image: UIImage, onComplition: @escaping ((String?)->())){
-        
-        let metadata = VisionImageMetadata()
-        metadata.orientation = .rightTop
-        
-        let image = VisionImage(image: image)
-        image.metadata = metadata
-        
-        textRecognizer.process(image) { (visionText: VisionText?, error: Error?) in
-            
-            guard error == nil, let visionText = visionText else {
-                onComplition(nil)
-                return
-            }
-            
-            onComplition(visionText.text)
-            
-        }
-
     }
     
     //MARK: Actions

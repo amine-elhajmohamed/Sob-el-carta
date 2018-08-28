@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3315D45E21321CAE0025BF07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3315D45D21321CAE0025BF07 /* AppDelegate.swift */; };
-		3315D46021321CAE0025BF07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3315D45F21321CAE0025BF07 /* ViewController.swift */; };
+		3315D46021321CAE0025BF07 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3315D45F21321CAE0025BF07 /* MainViewController.swift */; };
 		3315D46321321CAE0025BF07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3315D46121321CAE0025BF07 /* Main.storyboard */; };
 		3315D46521321CAF0025BF07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3315D46421321CAF0025BF07 /* Assets.xcassets */; };
 		3315D46821321CAF0025BF07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3315D46621321CAF0025BF07 /* LaunchScreen.storyboard */; };
@@ -17,6 +17,8 @@
 		3315D4782132335C0025BF07 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3315D4772132335C0025BF07 /* StringUtils.swift */; };
 		33A8D3922134241D00FB624D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3912134241D00FB624D /* Settings.swift */; };
 		33A8D3942134277E00FB624D /* OperatorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3932134277E00FB624D /* OperatorUtils.swift */; };
+		33A8D3962135554000FB624D /* TicketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3952135554000FB624D /* TicketController.swift */; };
+		33A8D3982135618300FB624D /* ChooseOperatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */; };
 		A93052627204C340BA78EEED /* Pods_Sob_el_carta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +27,7 @@
 		2D7F25A34A3A2BD04D69C170 /* Pods-Sob el carta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sob el carta.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sob el carta/Pods-Sob el carta.release.xcconfig"; sourceTree = "<group>"; };
 		3315D45A21321CAE0025BF07 /* Sob el carta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sob el carta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3315D45D21321CAE0025BF07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3315D45F21321CAE0025BF07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3315D45F21321CAE0025BF07 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3315D46221321CAE0025BF07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3315D46421321CAF0025BF07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3315D46721321CAF0025BF07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,6 +37,8 @@
 		3315D4772132335C0025BF07 /* StringUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		33A8D3912134241D00FB624D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		33A8D3932134277E00FB624D /* OperatorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorUtils.swift; sourceTree = "<group>"; };
+		33A8D3952135554000FB624D /* TicketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketController.swift; sourceTree = "<group>"; };
+		33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOperatorViewController.swift; sourceTree = "<group>"; };
 		D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sob_el_carta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,7 @@
 				33A8D3912134241D00FB624D /* Settings.swift */,
 				3315D4772132335C0025BF07 /* StringUtils.swift */,
 				33A8D3932134277E00FB624D /* OperatorUtils.swift */,
+				33A8D3952135554000FB624D /* TicketController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -113,7 +118,8 @@
 		3315D474213221210025BF07 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				3315D45F21321CAE0025BF07 /* ViewController.swift */,
+				3315D45F21321CAE0025BF07 /* MainViewController.swift */,
+				33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -285,10 +291,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3315D4782132335C0025BF07 /* StringUtils.swift in Sources */,
-				3315D46021321CAE0025BF07 /* ViewController.swift in Sources */,
+				3315D46021321CAE0025BF07 /* MainViewController.swift in Sources */,
 				33A8D3942134277E00FB624D /* OperatorUtils.swift in Sources */,
 				33A8D3922134241D00FB624D /* Settings.swift in Sources */,
+				33A8D3982135618300FB624D /* ChooseOperatorViewController.swift in Sources */,
 				3315D45E21321CAE0025BF07 /* AppDelegate.swift in Sources */,
+				33A8D3962135554000FB624D /* TicketController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
