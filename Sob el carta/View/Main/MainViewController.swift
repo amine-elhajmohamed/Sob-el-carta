@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXOrange: NSLayoutConstraint!
     @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXTunisieTelecom: NSLayoutConstraint!
     
-    private var isShowingSettingsView = false
+    private var isShowingSettingsView = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +65,10 @@ class MainViewController: UIViewController {
     }
     
     private func showSettings(animated: Bool){
+        guard !isShowingSettingsView else {
+            return
+        }
+        
         isShowingSettingsView = true
         
         let todo = {
@@ -86,6 +90,10 @@ class MainViewController: UIViewController {
     }
     
     private func hideSettings(animated: Bool){
+        guard isShowingSettingsView else {
+            return
+        }
+        
         isShowingSettingsView = false
         
         let todo = {
@@ -225,6 +233,7 @@ class MainViewController: UIViewController {
                         }
                     }
                     
+                    self.hideSettings(animated: true)
                     self.present(chooseOperatorVC, animated: false, completion: nil)
                     return
                 }
