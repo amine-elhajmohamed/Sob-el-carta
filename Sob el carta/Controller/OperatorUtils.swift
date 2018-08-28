@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum OperatorsNames : String {
+enum Operators : String {
     case ooredoo = "Ooredoo"
     case orange = "Orange"
     case tunisieTelecom = "Tunisie Telecom"

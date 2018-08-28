@@ -12,10 +12,10 @@ class Settings {
     
     static let shared = Settings()
     
-    var selectedOperator: String {
+    var selectedOperator: String? {
         get {
             let selectedOperator = UserDefaults.standard.value(forKey: "SelectedOperator") as? String
-            return selectedOperator ?? "Automatic"
+            return selectedOperator
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "SelectedOperator")

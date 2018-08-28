@@ -20,10 +20,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var viewAboveSettingsView: UIView!
     @IBOutlet weak var settingsReviewView: UIView!
     @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var viewContaintOperatorsViews: UIView!
+    @IBOutlet weak var bgViewForSelectedOperator: UIView!
+    @IBOutlet weak var ooredooView: UIView!
+    @IBOutlet weak var orangeView: UIView!
+    @IBOutlet weak var tunisieTelecomView: UIView!
+    
+    @IBOutlet weak var lblOperatorName: UILabel!
+    
+    @IBOutlet var cameraViewTapGesture: UITapGestureRecognizer!
+    @IBOutlet var ooredooViewTapGesture: UITapGestureRecognizer!
+    @IBOutlet var orangeViewTapGesture: UITapGestureRecognizer!
+    @IBOutlet var tunisieTelecomViewTapGesture: UITapGestureRecognizer!
+    
+    @IBOutlet weak var switchDetectOperatorAutomatically: UISwitch!
+    @IBOutlet weak var switchDetectDetectCardAutomatically: UISwitch!
     
     @IBOutlet weak var constarintSettingsReviewMenuBottom: NSLayoutConstraint!
     @IBOutlet weak var constarintSettingsViewBottom: NSLayoutConstraint!
-    
+    @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXOoredoo: NSLayoutConstraint!
+    @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXOrange: NSLayoutConstraint!
+    @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXTunisieTelecom: NSLayoutConstraint!
     
     private lazy var vision = Vision.vision()
     private lazy var textRecognizer = vision.onDeviceTextRecognizer()
@@ -43,10 +60,13 @@ class ViewController: UIViewController {
     
     private func configureView(){
         cameraView.addCameraBackground(.back, showButtons: false)
+        
+        bgViewForSelectedOperator.layer.cornerRadius = 15
     }
     
     private func loadSettingsData(){
-        
+        let operatorFromSettings = Operators(rawValue: Settings.shared.selectedOperator ?? "")
+        selectOperator(operatorFromSettings)
     }
     
     private func showSettings(animated: Bool){
@@ -91,6 +111,55 @@ class ViewController: UIViewController {
         
     }
     
+    private func selectOperator(_ phoneOperator: Operators?) {
+        Settings.shared.selectedOperator = phoneOperator?.rawValue
+        lblOperatorName.text = phoneOperator?.rawValue ?? "Automatique"
+        
+        guard let phoneOperator = phoneOperator else{
+            bgViewForSelectedOperator.alpha = 0
+            switchDetectOperatorAutomatically.isOn = true
+            constarintBgViewForSelectedOperatorCentreXOoredoo.priority = UILayoutPriority.defaultLow
+            constarintBgViewForSelectedOperatorCentreXOrange.priority = UILayoutPriority.defaultHigh
+            constarintBgViewForSelectedOperatorCentreXTunisieTelecom.priority = UILayoutPriority.defaultLow
+            return
+        }
+        
+        let performAnimation = { (block: @escaping (()->())) in
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: [.curveEaseOut], animations: {
+                block()
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+        
+        switch phoneOperator {
+        case .ooredoo:
+            performAnimation({
+                self.constarintBgViewForSelectedOperatorCentreXOoredoo.priority = UILayoutPriority.defaultHigh
+                self.constarintBgViewForSelectedOperatorCentreXOrange.priority = UILayoutPriority.defaultLow
+                self.constarintBgViewForSelectedOperatorCentreXTunisieTelecom.priority = UILayoutPriority.defaultLow
+            })
+        case .orange:
+            performAnimation({
+                self.constarintBgViewForSelectedOperatorCentreXOoredoo.priority = UILayoutPriority.defaultLow
+                self.constarintBgViewForSelectedOperatorCentreXOrange.priority = UILayoutPriority.defaultHigh
+                self.constarintBgViewForSelectedOperatorCentreXTunisieTelecom.priority = UILayoutPriority.defaultLow
+            })
+        case .tunisieTelecom:
+            performAnimation({
+                self.constarintBgViewForSelectedOperatorCentreXOoredoo.priority = UILayoutPriority.defaultLow
+                self.constarintBgViewForSelectedOperatorCentreXOrange.priority = UILayoutPriority.defaultLow
+                self.constarintBgViewForSelectedOperatorCentreXTunisieTelecom.priority = UILayoutPriority.defaultHigh
+            })
+        }
+        
+        if bgViewForSelectedOperator.alpha == 0 {
+            UIView.animate(withDuration: 0.1) {
+                self.bgViewForSelectedOperator.alpha = 1
+            }
+        }
+        
+        switchDetectOperatorAutomatically.isOn = false
+    }
     
     private func startLokingForTicketNumberFromCamera(){
         viewHandleCameraViewTap.isUserInteractionEnabled = false
@@ -163,14 +232,45 @@ class ViewController: UIViewController {
             }else{
                 showSettings(animated: true)
             }
-            
         default:
             break
         }
     }
     
-    @IBAction func cameraViewTaped(_ sender: UITapGestureRecognizer) {
-        startLokingForTicketNumberFromCamera()
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        switch sender {
+        case switchDetectOperatorAutomatically:
+            if sender.isOn {
+                selectOperator(nil)
+            } else {
+                loadSettingsData()
+                if Settings.shared.selectedOperator == nil {
+                    let alertVC = UIAlertController(title: "", message: "Vous devez choisir l'opérateur depuis le menu afin de désactiver la fonctionnalité de detection automatique", preferredStyle: .alert)
+                    alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    present(alertVC, animated: true, completion: nil)
+                }
+            }
+        case switchDetectDetectCardAutomatically:
+            break
+        default:
+            break
+        }
+    }
+    
+    @IBAction func tapGestureTaped(_ sender: UITapGestureRecognizer) {
+        switch sender {
+        case cameraViewTapGesture:
+            startLokingForTicketNumberFromCamera()
+        case ooredooViewTapGesture:
+            selectOperator(.ooredoo)
+        case orangeViewTapGesture:
+            selectOperator(.orange)
+        case tunisieTelecomViewTapGesture:
+            selectOperator(.tunisieTelecom)
+        default:
+            break
+        }
+        
     }
 }
 
