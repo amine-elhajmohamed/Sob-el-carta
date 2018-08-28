@@ -131,7 +131,11 @@ class MainViewController: UIViewController {
     
     private func dialTicketNumber(operatorCode: String, ticketNumber: String){
         if let phoneUrl = URL(string: "tel://*\(operatorCode)*\(ticketNumber)#") {
-            UIApplication.shared.open(phoneUrl, options: [:], completionHandler: nil)
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(phoneUrl, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(phoneUrl)
+            }
         }
     }
     

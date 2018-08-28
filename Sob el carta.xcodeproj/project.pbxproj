@@ -19,6 +19,7 @@
 		33A8D3942134277E00FB624D /* OperatorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3932134277E00FB624D /* OperatorUtils.swift */; };
 		33A8D3962135554000FB624D /* TicketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3952135554000FB624D /* TicketController.swift */; };
 		33A8D3982135618300FB624D /* ChooseOperatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */; };
+		33C561742135814800B6AE9B /* VisionTextDetectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C561732135814800B6AE9B /* VisionTextDetectionController.swift */; };
 		A93052627204C340BA78EEED /* Pods_Sob_el_carta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		33A8D3932134277E00FB624D /* OperatorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorUtils.swift; sourceTree = "<group>"; };
 		33A8D3952135554000FB624D /* TicketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketController.swift; sourceTree = "<group>"; };
 		33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOperatorViewController.swift; sourceTree = "<group>"; };
+		33C561732135814800B6AE9B /* VisionTextDetectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionTextDetectionController.swift; sourceTree = "<group>"; };
 		D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sob_el_carta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 				3315D4772132335C0025BF07 /* StringUtils.swift */,
 				33A8D3932134277E00FB624D /* OperatorUtils.swift */,
 				33A8D3952135554000FB624D /* TicketController.swift */,
+				33C561732135814800B6AE9B /* VisionTextDetectionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				33A8D3922134241D00FB624D /* Settings.swift in Sources */,
 				33A8D3982135618300FB624D /* ChooseOperatorViewController.swift in Sources */,
 				3315D45E21321CAE0025BF07 /* AppDelegate.swift in Sources */,
+				33C561742135814800B6AE9B /* VisionTextDetectionController.swift in Sources */,
 				33A8D3962135554000FB624D /* TicketController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +448,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GXL4M9LBQ5;
 				INFOPLIST_FILE = "Sob el carta/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GXL4M9LBQ5;
 				INFOPLIST_FILE = "Sob el carta/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
