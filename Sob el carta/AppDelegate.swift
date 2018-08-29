@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        if #available(iOS 11.0, *) {
+        }else{
+            Settings.shared.scanCardAutomatically = false
+        }
+        
         return true
     }
 

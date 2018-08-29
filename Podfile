@@ -11,5 +11,6 @@ pod 'Firebase/Core'
 pod 'Firebase/MLVision'
 pod 'Firebase/MLVisionTextModel'
 pod 'CameraBackground'
+pod 'FLAnimatedImage'
 
 end

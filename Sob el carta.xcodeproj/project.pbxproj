@@ -20,6 +20,8 @@
 		33A8D3962135554000FB624D /* TicketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3952135554000FB624D /* TicketController.swift */; };
 		33A8D3982135618300FB624D /* ChooseOperatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */; };
 		33C561742135814800B6AE9B /* VisionTextDetectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C561732135814800B6AE9B /* VisionTextDetectionController.swift */; };
+		33C56177213595EE00B6AE9B /* VisionTextDetectionControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C56176213595EE00B6AE9B /* VisionTextDetectionControllerDelegate.swift */; };
+		33C561792135A7FC00B6AE9B /* AnimatRocket.gif in Resources */ = {isa = PBXBuildFile; fileRef = 33C561782135A7FC00B6AE9B /* AnimatRocket.gif */; };
 		A93052627204C340BA78EEED /* Pods_Sob_el_carta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		33A8D3952135554000FB624D /* TicketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketController.swift; sourceTree = "<group>"; };
 		33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOperatorViewController.swift; sourceTree = "<group>"; };
 		33C561732135814800B6AE9B /* VisionTextDetectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionTextDetectionController.swift; sourceTree = "<group>"; };
+		33C56176213595EE00B6AE9B /* VisionTextDetectionControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionTextDetectionControllerDelegate.swift; sourceTree = "<group>"; };
+		33C561782135A7FC00B6AE9B /* AnimatRocket.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = AnimatRocket.gif; sourceTree = "<group>"; };
 		D83E6FE4DDC6390976838AD6 /* Pods_Sob_el_carta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sob_el_carta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,6 +85,7 @@
 				3315D4732132210C0025BF07 /* Model */,
 				3315D472213221090025BF07 /* View */,
 				3315D471213221060025BF07 /* Controller */,
+				33C5617A2135A86500B6AE9B /* src */,
 				3315D46421321CAF0025BF07 /* Assets.xcassets */,
 				3315D46921321CAF0025BF07 /* Info.plist */,
 				3315D46F213220650025BF07 /* GoogleService-Info.plist */,
@@ -92,6 +97,7 @@
 		3315D471213221060025BF07 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				33C56175213595E100B6AE9B /* Delagate */,
 				33A8D3912134241D00FB624D /* Settings.swift */,
 				3315D4772132335C0025BF07 /* StringUtils.swift */,
 				33A8D3932134277E00FB624D /* OperatorUtils.swift */,
@@ -125,6 +131,22 @@
 				33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		33C56175213595E100B6AE9B /* Delagate */ = {
+			isa = PBXGroup;
+			children = (
+				33C56176213595EE00B6AE9B /* VisionTextDetectionControllerDelegate.swift */,
+			);
+			path = Delagate;
+			sourceTree = "<group>";
+		};
+		33C5617A2135A86500B6AE9B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				33C561782135A7FC00B6AE9B /* AnimatRocket.gif */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		522F1C5AD774B48E3F59111B /* Frameworks */ = {
@@ -205,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33C561792135A7FC00B6AE9B /* AnimatRocket.gif in Resources */,
 				3315D46821321CAF0025BF07 /* LaunchScreen.storyboard in Resources */,
 				3315D470213220650025BF07 /* GoogleService-Info.plist in Resources */,
 				3315D46521321CAF0025BF07 /* Assets.xcassets in Resources */,
@@ -260,6 +283,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sob el carta/Pods-Sob el carta-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CameraBackground/CameraBackground.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -272,6 +296,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CameraBackground.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -294,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3315D4782132335C0025BF07 /* StringUtils.swift in Sources */,
+				33C56177213595EE00B6AE9B /* VisionTextDetectionControllerDelegate.swift in Sources */,
 				3315D46021321CAE0025BF07 /* MainViewController.swift in Sources */,
 				33A8D3942134277E00FB624D /* OperatorUtils.swift in Sources */,
 				33A8D3922134241D00FB624D /* Settings.swift in Sources */,
