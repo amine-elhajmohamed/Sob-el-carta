@@ -325,6 +325,7 @@ class MainViewController: UIViewController {
         isShowingSettingsView = true
         
         if #available(iOS 11.0, *) {
+            self.stopAnalysingCardInBackground()
             visionTextDetectionController?.stop()
         }
         
