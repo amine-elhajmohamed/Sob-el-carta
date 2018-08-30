@@ -109,7 +109,7 @@ class MainViewController: UIViewController {
             return
         }
         startVisionTextDetectionControllerWhenAppBecomeActive = false
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
             visionTextDetectionController?.start()
         }
     }
@@ -243,7 +243,7 @@ class MainViewController: UIViewController {
                 onComplitionDo()
                 let alertVC = UIAlertController(title: "Erreur", message: "Échec dans le caméra, peut pas prendre le photo", preferredStyle: .alert)
                 alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (ac) in
-                    if #available(iOS 11.0, *) {
+                    if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
                         self.visionTextDetectionController?.start()
                     }
                 }))
@@ -257,7 +257,7 @@ class MainViewController: UIViewController {
                     let alertVC = UIAlertController(title: "Échec", message: "Peut pas trouver le numéro de la carte, essayez à nouveau de scanner la carte", preferredStyle: .alert)
                     alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (ac) in
                         onComplitionDo()
-                        if #available(iOS 11.0, *) {
+                        if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
                             self.visionTextDetectionController?.start()
                         }
                     }))
@@ -267,7 +267,9 @@ class MainViewController: UIViewController {
                 
                 self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {
                     onComplitionDo()
-                    self.startVisionTextDetectionControllerWhenAppBecomeActive = true
+                    if Settings.shared.scanCardAutomatically {
+                        self.startVisionTextDetectionControllerWhenAppBecomeActive = true
+                    }
                 })
             })
         }
@@ -287,7 +289,9 @@ class MainViewController: UIViewController {
                 
                 guard let ticketNumber = ticketNumber else {
                     self.stopAnalysingCardInBackground()
-                    self.visionTextDetectionController?.start()
+                    if Settings.shared.scanCardAutomatically {
+                        self.visionTextDetectionController?.start()
+                    }
                     return
                 }
                 
@@ -295,7 +299,9 @@ class MainViewController: UIViewController {
                 
                 self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {
                     self.stopAnalysingCardInBackground()
-                    self.startVisionTextDetectionControllerWhenAppBecomeActive = true
+                    if Settings.shared.scanCardAutomatically {
+                        self.startVisionTextDetectionControllerWhenAppBecomeActive = true
+                    }
                 })
             })
         }
@@ -317,6 +323,10 @@ class MainViewController: UIViewController {
         }
         
         isShowingSettingsView = true
+        
+        if #available(iOS 11.0, *) {
+            visionTextDetectionController?.stop()
+        }
         
         let todo = {
             self.constarintSettingsReviewMenuBottom.priority = UILayoutPriority(250)
@@ -342,6 +352,10 @@ class MainViewController: UIViewController {
         }
         
         isShowingSettingsView = false
+        
+        if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
+            visionTextDetectionController?.start()
+        }
         
         let todo = {
             self.constarintSettingsViewBottom.priority = UILayoutPriority(250)
