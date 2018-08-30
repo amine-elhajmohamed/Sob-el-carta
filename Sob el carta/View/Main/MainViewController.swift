@@ -50,6 +50,7 @@ class MainViewController: UIViewController {
     private var analysingCardInBackgroundDispatchWorkItem: DispatchWorkItem?
     
     private var isShowingSettingsView = true
+    private var startVisionTextDetectionControllerWhenAppBecomeActive = false
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -92,6 +93,8 @@ class MainViewController: UIViewController {
         } else {
             switchDetectDetectCardAutomatically.isEnabled = false
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
     }
     
     private func loadSettingsData(){
@@ -99,6 +102,16 @@ class MainViewController: UIViewController {
         selectOperator(operatorFromSettings)
         
         switchDetectDetectCardAutomatically.isOn = Settings.shared.scanCardAutomatically
+    }
+    
+    @objc private func applicationDidBecomeActive(){
+        guard startVisionTextDetectionControllerWhenAppBecomeActive else {
+            return
+        }
+        startVisionTextDetectionControllerWhenAppBecomeActive = false
+        if #available(iOS 11.0, *) {
+            visionTextDetectionController?.start()
+        }
     }
     
     //MARK:- Card analyse operations
@@ -214,6 +227,10 @@ class MainViewController: UIViewController {
     
     private func startLookingForTicketNumberFromCamera(){
         viewHandleCameraViewTap.isUserInteractionEnabled = false
+        stopAnalysingCardInBackground()
+        if #available(iOS 11.0, *) {
+            visionTextDetectionController?.stop()
+        }
         
         let onComplitionDo = {
             self.cameraView.freeCameraSnapshot()
@@ -225,7 +242,11 @@ class MainViewController: UIViewController {
             guard error == nil, let image = image else {
                 onComplitionDo()
                 let alertVC = UIAlertController(title: "Erreur", message: "Échec dans le caméra, peut pas prendre le photo", preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (ac) in
+                    if #available(iOS 11.0, *) {
+                        self.visionTextDetectionController?.start()
+                    }
+                }))
                 self.present(alertVC, animated: true, completion: nil)
                 return
             }
@@ -236,6 +257,9 @@ class MainViewController: UIViewController {
                     let alertVC = UIAlertController(title: "Échec", message: "Peut pas trouver le numéro de la carte, essayez à nouveau de scanner la carte", preferredStyle: .alert)
                     alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (ac) in
                         onComplitionDo()
+                        if #available(iOS 11.0, *) {
+                            self.visionTextDetectionController?.start()
+                        }
                     }))
                     self.present(alertVC, animated: true, completion: nil)
                     return
@@ -243,6 +267,7 @@ class MainViewController: UIViewController {
                 
                 self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {
                     onComplitionDo()
+                    self.startVisionTextDetectionControllerWhenAppBecomeActive = true
                 })
             })
         }
@@ -270,7 +295,7 @@ class MainViewController: UIViewController {
                 
                 self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {
                     self.stopAnalysingCardInBackground()
-                    self.visionTextDetectionController?.start()
+                    self.startVisionTextDetectionControllerWhenAppBecomeActive = true
                 })
             })
         }
