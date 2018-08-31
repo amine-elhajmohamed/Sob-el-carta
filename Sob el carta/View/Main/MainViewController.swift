@@ -450,12 +450,6 @@ class MainViewController: UIViewController {
         case switchDetectDetectCardAutomatically:
             if #available(iOS 11.0, *) {
                 Settings.shared.scanCardAutomatically = sender.isOn
-                
-                if sender.isOn {
-                    visionTextDetectionController?.start()
-                } else {
-                    visionTextDetectionController?.stop()
-                }
             } else {
                 sender.isOn = false
             }
