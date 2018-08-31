@@ -56,6 +56,7 @@ class MainViewController: UIViewController {
     private var isShowingSettingsView = true
     private var startVisionTextDetectionControllerWhenAppBecomeActive = false
     private var freeCameraViewSnapshotWhenAppBecomeActive = false
+    private var isShowingAnalysingCardInBackgroundView = false
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -126,6 +127,7 @@ class MainViewController: UIViewController {
         if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
             visionTextDetectionController?.stop()
             startVisionTextDetectionControllerWhenAppBecomeActive = true
+            stopAnalysingCardInBackground()
         }
     }
     
@@ -428,6 +430,12 @@ class MainViewController: UIViewController {
     }
     
     private func showIsAnalysingCardInBackground(){
+        guard !isShowingAnalysingCardInBackgroundView else {
+            return
+        }
+        
+        isShowingAnalysingCardInBackgroundView = true
+        
         animatedImageForAutoScan.startAnimating()
         
         UIView.animate(withDuration: 0.5) {
@@ -436,6 +444,12 @@ class MainViewController: UIViewController {
     }
     
     private func hideIsAnalysingCardInBackground(){
+        guard isShowingAnalysingCardInBackgroundView else {
+            return
+        }
+        
+        isShowingAnalysingCardInBackgroundView = false
+        
         UIView.animate(withDuration: 0.5, animations: {
             self.animatedImageForAutoScan.alpha = 0
         }) { (b) in
