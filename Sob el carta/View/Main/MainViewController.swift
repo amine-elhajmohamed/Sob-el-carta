@@ -121,7 +121,10 @@ class MainViewController: UIViewController {
     
     //MARK:- Card analyse operations
     
-    private func dialTicketNumber(operatorCode: String?, ticketNumber: String, onComplition: @escaping (()->())){
+    /**
+     onComplition(Bool) -> Bool parametre to indicate that the app has try to make the phone call (AppBecomeActive after the dismiss) or the user cancel the operation and an normal alert has been dissmised
+     */
+    private func dialTicketNumber(operatorCode: String?, ticketNumber: String, onComplition: @escaping ((Bool)->())){
         let selectedOperator = Settings.shared.selectedOperator
         
         guard (selectedOperator != nil) || (operatorCode != nil) else {
@@ -130,13 +133,13 @@ class MainViewController: UIViewController {
             chooseOperatorVC.onOperatorSelection = { (selectedOperatorFromView: Operators?) in
                 guard let selectedOperatorFromView = selectedOperatorFromView else {
                     chooseOperatorVC.close {
-                        onComplition()
+                        onComplition(false)
                     }
                     return
                 }
                 
                 chooseOperatorVC.close {
-                    onComplition()
+                    onComplition(true)
                     self.dialTicketNumber(phoneOperator: selectedOperatorFromView, ticketNumber: ticketNumber)
                 }
             }
@@ -146,7 +149,7 @@ class MainViewController: UIViewController {
             return
         }
         
-        onComplition()
+        onComplition(true)
         
         if let phoneOperator = Operators(rawValue: selectedOperator ?? ""){
             self.dialTicketNumber(phoneOperator: phoneOperator, ticketNumber: ticketNumber)
@@ -279,8 +282,12 @@ class MainViewController: UIViewController {
                     return
                 }
                 
-                self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {
-                    onComplitionDoAfterAppBecomeActive()
+                self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: { (userDidMakeTheCallRequest: Bool) in
+                    if userDidMakeTheCallRequest {
+                        onComplitionDoAfterAppBecomeActive()
+                    }else{
+                        onComplitionDoAfterDismissNormalAlert()
+                    }
                 })
             })
         }
@@ -308,11 +315,20 @@ class MainViewController: UIViewController {
                 
                 self.hideIsAnalysingCardInBackground()
                 
-                self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {
+                self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {(userDidMakeTheCallRequest: Bool) in
                     self.stopAnalysingCardInBackground()
-                    if Settings.shared.scanCardAutomatically {
-                        self.startVisionTextDetectionControllerWhenAppBecomeActive = true
+                    
+                    if userDidMakeTheCallRequest {
+                        if Settings.shared.scanCardAutomatically {
+                            self.startVisionTextDetectionControllerWhenAppBecomeActive = true
+                        }
+                    } else {
+                        if Settings.shared.scanCardAutomatically {
+                            self.visionTextDetectionController?.start()
+                        }
                     }
+                    
+                    
                 })
             })
         }
