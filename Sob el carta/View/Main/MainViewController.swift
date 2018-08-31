@@ -51,6 +51,7 @@ class MainViewController: UIViewController {
     
     private var isShowingSettingsView = true
     private var startVisionTextDetectionControllerWhenAppBecomeActive = false
+    private var freeCameraViewSnapshotWhenAppBecomeActive = false
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -105,12 +106,16 @@ class MainViewController: UIViewController {
     }
     
     @objc private func applicationDidBecomeActive(){
-        guard startVisionTextDetectionControllerWhenAppBecomeActive else {
-            return
+        if startVisionTextDetectionControllerWhenAppBecomeActive{
+            startVisionTextDetectionControllerWhenAppBecomeActive = false
+            if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
+                visionTextDetectionController?.start()
+            }
         }
-        startVisionTextDetectionControllerWhenAppBecomeActive = false
-        if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
-            visionTextDetectionController?.start()
+        
+        if freeCameraViewSnapshotWhenAppBecomeActive {
+            freeCameraViewSnapshotWhenAppBecomeActive = false
+            cameraView.freeCameraSnapshot()
         }
     }
     
@@ -233,19 +238,31 @@ class MainViewController: UIViewController {
         }
         
         let onComplitionDo = {
-            self.cameraView.freeCameraSnapshot()
             self.viewHandleCameraViewTap.isUserInteractionEnabled = true
+        }
+        
+        let onComplitionDoAfterDismissNormalAlert = {
+            onComplitionDo()
+            self.cameraView.freeCameraSnapshot()
+            if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
+                self.visionTextDetectionController?.start()
+            }
+        }
+        
+        let onComplitionDoAfterAppBecomeActive = {
+            onComplitionDo()
+            self.freeCameraViewSnapshotWhenAppBecomeActive = true
+            if Settings.shared.scanCardAutomatically {
+                self.startVisionTextDetectionControllerWhenAppBecomeActive = true
+            }
         }
         
         cameraView.takeCameraSnapshot(nil) { (image: UIImage?, error: NSError?) in
             
             guard error == nil, let image = image else {
-                onComplitionDo()
                 let alertVC = UIAlertController(title: "Erreur", message: "Échec dans le caméra, peut pas prendre le photo", preferredStyle: .alert)
                 alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (ac) in
-                    if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
-                        self.visionTextDetectionController?.start()
-                    }
+                    onComplitionDoAfterDismissNormalAlert()
                 }))
                 self.present(alertVC, animated: true, completion: nil)
                 return
@@ -256,20 +273,14 @@ class MainViewController: UIViewController {
                 guard let ticketNumber = ticketNumber else {
                     let alertVC = UIAlertController(title: "Échec", message: "Peut pas trouver le numéro de la carte, essayez à nouveau de scanner la carte", preferredStyle: .alert)
                     alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (ac) in
-                        onComplitionDo()
-                        if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
-                            self.visionTextDetectionController?.start()
-                        }
+                        onComplitionDoAfterDismissNormalAlert()
                     }))
                     self.present(alertVC, animated: true, completion: nil)
                     return
                 }
                 
                 self.dialTicketNumber(operatorCode: operatorCode, ticketNumber: ticketNumber, onComplition: {
-                    onComplitionDo()
-                    if Settings.shared.scanCardAutomatically {
-                        self.startVisionTextDetectionControllerWhenAppBecomeActive = true
-                    }
+                    onComplitionDoAfterAppBecomeActive()
                 })
             })
         }
