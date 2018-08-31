@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33065A1E213982B400A4A494 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33065A1D213982B400A4A494 /* LaunchScreenViewController.swift */; };
 		3315D45E21321CAE0025BF07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3315D45D21321CAE0025BF07 /* AppDelegate.swift */; };
 		3315D46021321CAE0025BF07 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3315D45F21321CAE0025BF07 /* MainViewController.swift */; };
 		3315D46321321CAE0025BF07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3315D46121321CAE0025BF07 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		06C62257D5C60B58A2AA97BC /* Pods-Sob el carta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sob el carta.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sob el carta/Pods-Sob el carta.debug.xcconfig"; sourceTree = "<group>"; };
 		2D7F25A34A3A2BD04D69C170 /* Pods-Sob el carta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sob el carta.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sob el carta/Pods-Sob el carta.release.xcconfig"; sourceTree = "<group>"; };
+		33065A1D213982B400A4A494 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3315D45A21321CAE0025BF07 /* Sob el carta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sob el carta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3315D45D21321CAE0025BF07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3315D45F21321CAE0025BF07 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		3315D474213221210025BF07 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				33065A1D213982B400A4A494 /* LaunchScreenViewController.swift */,
 				3315D45F21321CAE0025BF07 /* MainViewController.swift */,
 				33A8D3972135618300FB624D /* ChooseOperatorViewController.swift */,
 			);
@@ -326,6 +329,7 @@
 				33A8D3982135618300FB624D /* ChooseOperatorViewController.swift in Sources */,
 				3315D45E21321CAE0025BF07 /* AppDelegate.swift in Sources */,
 				33C561742135814800B6AE9B /* VisionTextDetectionController.swift in Sources */,
+				33065A1E213982B400A4A494 /* LaunchScreenViewController.swift in Sources */,
 				33A8D3962135554000FB624D /* TicketController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

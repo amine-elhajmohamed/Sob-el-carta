@@ -45,17 +45,28 @@ class MainViewController: UIViewController {
     @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXOrange: NSLayoutConstraint!
     @IBOutlet weak var constarintBgViewForSelectedOperatorCentreXTunisieTelecom: NSLayoutConstraint!
     
+    private var launchScreenVC: LaunchScreenViewController?
+    
     @available(iOS 11.0, *)
     private lazy var visionTextDetectionController: VisionTextDetectionController? = nil
     
     private var analysingCardInBackgroundDispatchWorkItem: DispatchWorkItem?
     
+    private var isFirstTimeViewAppearing = true
     private var isShowingSettingsView = true
     private var startVisionTextDetectionControllerWhenAppBecomeActive = false
     private var freeCameraViewSnapshotWhenAppBecomeActive = false
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if isFirstTimeViewAppearing {
+            isFirstTimeViewAppearing = false
+            launchScreenVC?.animateClosingView(delay: 0.1, onComplition: {
+                self.launchScreenVC?.view.removeFromSuperview()
+                self.launchScreenVC = nil
+            })
+        }
         
         if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
             visionTextDetectionController?.start()
@@ -98,6 +109,10 @@ class MainViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
+        
+        
+        launchScreenVC = storyboard?.instantiateViewController(withIdentifier: "LaunchScreenVC") as? LaunchScreenViewController
+        view.addSubview(launchScreenVC!.view)
     }
     
     private func loadSettingsData(){
