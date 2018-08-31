@@ -13,6 +13,7 @@ import FLAnimatedImage
 class MainViewController: UIViewController {
     
     @IBOutlet weak var btnSettings: UIButton!
+    @IBOutlet weak var btnScanCardAutomaticallyInfoButton: UIButton!
     
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var viewHandleCameraViewTap: UIView!
@@ -437,6 +438,10 @@ class MainViewController: UIViewController {
             }else{
                 showSettings(animated: true)
             }
+        case btnScanCardAutomaticallyInfoButton:
+            let alertVC = UIAlertController(title: "Scanner la carte automatiquement", message: "Scanner la carte en arrière-plan, vous devez simplement mettre la carte devant la caméra et le système va le détectera automatiquement.", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alertVC, animated: true, completion: nil)
         default:
             break
         }
