@@ -95,6 +95,7 @@ class MainViewController: UIViewController {
             switchDetectDetectCardAutomatically.isEnabled = false
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
     }
     
@@ -103,6 +104,13 @@ class MainViewController: UIViewController {
         selectOperator(operatorFromSettings)
         
         switchDetectDetectCardAutomatically.isOn = Settings.shared.scanCardAutomatically
+    }
+    
+    @objc private func applicationWillResignActive(){
+        if #available(iOS 11.0, *), Settings.shared.scanCardAutomatically {
+            visionTextDetectionController?.stop()
+            startVisionTextDetectionControllerWhenAppBecomeActive = true
+        }
     }
     
     @objc private func applicationDidBecomeActive(){
