@@ -256,7 +256,7 @@ class MainViewController: UIViewController {
             }
         }
         
-        switchDetectOperatorAutomatically.isOn = false
+        switchDetectOperatorAutomatically.setOn(false, animated: true)
     }
     
     private func startLookingForTicketNumberFromCamera(){
@@ -493,7 +493,7 @@ class MainViewController: UIViewController {
             if #available(iOS 11.0, *) {
                 Settings.shared.scanCardAutomatically = sender.isOn
             } else {
-                sender.isOn = false
+                sender.setOn(false, animated: true)
             }
         default:
             break
