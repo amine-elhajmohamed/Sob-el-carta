@@ -7,7 +7,7 @@ target 'Sob el carta' do
 
   # Pods for Sob el carta
 
-pod 'Firebase/Core'
+#pod 'Firebase/Core' #Disabled to remove analytics
 pod 'Firebase/MLVision'
 pod 'Firebase/MLVisionTextModel'
 pod 'CameraBackground'
